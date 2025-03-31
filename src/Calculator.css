@@ -600,10 +600,10 @@ button:active {
     border-radius: 5px;
   }
 
-  /* Make scientific grid 6 columns */
+  /* Make scientific grid 5 columns */
   .scientific-grid {
     gap: 3px;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .scientific-button {
