@@ -16,7 +16,7 @@ function Calculator() {
     document.body.className = theme
   }, [theme])
 
-  const operators = ["+", "-", "*", "/", "%"]
+  const operators = ["+", "-", "*", "/", "%", "^"]
 
   const updateCals = (value) => {
     // Prevent invalid operator usage
@@ -105,6 +105,7 @@ function Calculator() {
         .replace(/e\^(\d+|$$.*?$$)/g, "Math.pow(Math.E,$1)")
         .replace(/10\^(\d+|$$.*?$$)/g, "Math.pow(10,$1)")
         .replace(/2\^(\d+|$$.*?$$)/g, "Math.pow(2,$1)")
+        .replace(/(\d+|\))\^(\d+|\()/g, "Math.pow($1,$2)")
 
       // Then replace scientific notations with JavaScript equivalents
       processedExpr = processedExpr
@@ -399,12 +400,6 @@ function Calculator() {
               >
                 {secondMode ? "1st" : "2nd"}
               </button>
-              <button
-                className={`memory-button ${angleMode === "DEG" ? "degree-mode" : "radian-mode"}`}
-                onClick={toggleAngleMode}
-              >
-                {angleMode}
-              </button>
               <button className="memory-button" onClick={memoryClear}>
                 MC
               </button>
@@ -420,8 +415,11 @@ function Calculator() {
             </div>
 
             <div className="scientific-grid">
-              <button className="scientific-button" onClick={() => toggleSign("±")}>
-                ±
+              <button
+                className={`memory-button ${angleMode === "DEG" ? "degree-mode" : "radian-mode"}`}
+                onClick={toggleAngleMode}
+              >
+                {angleMode}
               </button>
               <button className="scientific-button" onClick={() => updateCals("π")}>
                 π
@@ -443,6 +441,9 @@ function Calculator() {
               </button>
               <button className="scientific-button" onClick={() => addFunction("sqrt")}>
                 √
+              </button>
+              <button className="scientific-button" onClick={() => updateCals("^")}>
+                xʸ
               </button>
               <button className="scientific-button" onClick={() => updateCals("e^")}>
                 eˣ
@@ -509,6 +510,9 @@ function Calculator() {
                   </button>
                 </>
               )}
+              <button className="scientific-button" onClick={() => toggleSign("±")}>
+                ±
+              </button>
             </div>
           </div>
 

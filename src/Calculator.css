@@ -229,7 +229,7 @@ body.light-theme {
 
 .memory-row {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 8px;
   margin-bottom: 15px;
 }
@@ -679,9 +679,9 @@ button:active {
 
 /* Extra small screens */
 @media (max-width: 360px) {
-  /* Make scientific grid 4 columns on very small screens */
+  /* Make scientific grid 5 columns on very small screens */
   .scientific-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   button {
