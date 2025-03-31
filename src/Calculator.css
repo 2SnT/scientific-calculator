@@ -1,0 +1,721 @@
+/* Theme Variables */
+:root {
+  /* Dark Theme (Default) */
+  --dark-bg-primary: #1e1e1e;
+  --dark-bg-secondary: #2d2d2d;
+  --dark-bg-tertiary: #1a1a1a;
+  --dark-text-primary: #ffffff;
+  --dark-text-secondary: #adb5bd;
+  --dark-button-memory: #333333;
+  --dark-button-memory-hover: #444444;
+  --dark-button-scientific: #333333;
+  --dark-button-scientific-hover: #444444;
+  --dark-button-number: #495057;
+  --dark-button-number-hover: #6c757d;
+  --dark-button-operator: #fd7e14;
+  --dark-button-operator-hover: #e8590c;
+  --dark-button-clear: #e03131;
+  --dark-button-clear-hover: #c92a2a;
+  --dark-button-equals: #1c7ed6;
+  --dark-button-equals-hover: #1971c2;
+  --dark-border: #333;
+  --dark-shadow: rgba(0, 0, 0, 0.4);
+  --dark-highlight: #4dabf7;
+  --dark-highlight-bg: rgba(77, 171, 247, 0.1);
+  
+  /* Light Theme */
+  --light-bg-primary: #f8f9fa;
+  --light-bg-secondary: #e9ecef;
+  --light-bg-tertiary: #dee2e6;
+  --light-text-primary: #212529;
+  --light-text-secondary: #495057;
+  --light-button-memory: #e9ecef;
+  --light-button-memory-hover: #dee2e6;
+  --light-button-scientific: #e9ecef;
+  --light-button-scientific-hover: #dee2e6;
+  --light-button-number: #f1f3f5;
+  --light-button-number-hover: #e9ecef;
+  --light-button-operator: #ff922b;
+  --light-button-operator-hover: #fd7e14;
+  --light-button-clear: #fa5252;
+  --light-button-clear-hover: #e03131;
+  --light-button-equals: #339af0;
+  --light-button-equals-hover: #1c7ed6;
+  --light-border: #ced4da;
+  --light-shadow: rgba(0, 0, 0, 0.1);
+  --light-highlight: #339af0;
+  --light-highlight-bg: rgba(51, 154, 240, 0.1);
+}
+
+/* Theme Classes */
+.dark-theme {
+  --bg-primary: var(--dark-bg-primary);
+  --bg-secondary: var(--dark-bg-secondary);
+  --bg-tertiary: var(--dark-bg-tertiary);
+  --text-primary: var(--dark-text-primary);
+  --text-secondary: var(--dark-text-secondary);
+  --button-memory: var(--dark-button-memory);
+  --button-memory-hover: var(--dark-button-memory-hover);
+  --button-scientific: var(--dark-button-scientific);
+  --button-scientific-hover: var(--dark-button-scientific-hover);
+  --button-number: var(--dark-button-number);
+  --button-number-hover: var(--dark-button-number-hover);
+  --button-operator: var(--dark-button-operator);
+  --button-operator-hover: var(--dark-button-operator-hover);
+  --button-clear: var(--dark-button-clear);
+  --button-clear-hover: var(--dark-button-clear-hover);
+  --button-equals: var(--dark-button-equals);
+  --button-equals-hover: var(--dark-button-equals-hover);
+  --border: var(--dark-border);
+  --shadow: var(--dark-shadow);
+  --highlight: var(--dark-highlight);
+  --highlight-bg: var(--dark-highlight-bg);
+}
+
+.light-theme {
+  --bg-primary: var(--light-bg-primary);
+  --bg-secondary: var(--light-bg-secondary);
+  --bg-tertiary: var(--light-bg-tertiary);
+  --text-primary: var(--light-text-primary);
+  --text-secondary: var(--light-text-secondary);
+  --button-memory: var(--light-button-memory);
+  --button-memory-hover: var(--light-button-memory-hover);
+  --button-scientific: var(--light-button-scientific);
+  --button-scientific-hover: var(--light-button-scientific-hover);
+  --button-number: var(--light-button-number);
+  --button-number-hover: var(--light-button-number-hover);
+  --button-operator: var(--light-button-operator);
+  --button-operator-hover: var(--light-button-operator-hover);
+  --button-clear: var(--light-button-clear);
+  --button-clear-hover: var(--light-button-clear-hover);
+  --button-equals: var(--light-button-equals);
+  --button-equals-hover: var(--light-button-equals-hover);
+  --border: var(--light-border);
+  --shadow: var(--light-shadow);
+  --highlight: var(--light-highlight);
+  --highlight-bg: var(--light-highlight-bg);
+}
+
+/* Apply theme to body */
+body.dark-theme {
+  background: linear-gradient(135deg, #2b2b2b 0%, #1a1a1a 100%);
+}
+
+body.light-theme {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Calculator Container */
+.calculator-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px;
+  margin: 0 auto;
+}
+
+.calculator {
+  flex: 1;
+  background-color: var(--bg-primary);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow);
+  font-family: "Arial", sans-serif;
+  min-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Display */
+.display {
+  background-color: var(--bg-secondary);
+  padding: 30px;
+  text-align: right;
+  position: relative;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-right: 80px;
+}
+
+.memory-indicator {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 14px;
+  color: var(--highlight);
+  background-color: var(--highlight-bg);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.expression-value {
+  font-size: 20px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  min-height: 20px;
+  font-family: "Courier New", monospace;
+}
+
+.display-value {
+  font-size: 42px;
+  color: var(--text-primary);
+  font-family: "Courier New", monospace;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: var(--highlight) var(--bg-secondary);
+}
+
+.display-value::-webkit-scrollbar {
+  height: 4px;
+}
+
+.display-value::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+.display-value::-webkit-scrollbar-thumb {
+  background-color: var(--highlight);
+  border-radius: 4px;
+}
+
+.display-controls {
+  position: absolute;
+  top: 15px;
+  /* left: 15px;*/ right: 15px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.theme-toggle-button,
+.history-toggle-button {
+  background-color: var(--button-scientific);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 4px;
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.theme-toggle-button:hover,
+.history-toggle-button:hover {
+  background-color: var(--button-scientific-hover);
+}
+
+/* Calculator Body - New Layout */
+.calculator-body {
+  display: flex;
+  flex: 1;
+  background-color: var(--bg-tertiary);
+}
+
+/* Scientific Panel (Left Side) */
+.scientific-panel {
+  flex: 1;
+  padding: 15px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.memory-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.scientific-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  flex: 1;
+}
+
+/* Standard Panel (Right Side) */
+.standard-panel {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.standard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+}
+
+.clear-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.numpad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  flex: 1;
+}
+
+.equals-button {
+  margin-top: 8px;
+  height: 60px;
+}
+
+.zero-button {
+  grid-column: span 2;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+/* Button Styles */
+button {
+  border: none;
+  font-size: 20px;
+  padding: 15px 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px var(--shadow);
+  height: 60px;
+  color: var(--text-primary);
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px var(--shadow);
+}
+
+.memory-button {
+  background-color: var(--button-memory);
+  font-size: 16px;
+}
+
+.memory-button:hover {
+  background-color: var(--button-memory-hover);
+}
+
+.scientific-button {
+  background-color: var(--button-scientific);
+}
+
+.scientific-button:hover {
+  background-color: var(--button-scientific-hover);
+}
+
+/* 2nd Mode Button */
+.second-mode {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.second-mode .first-mode:hover {
+  background-color: #3f4b40;
+  color: black;
+}
+
+/* .first-mode {
+  background-color: #f44336; /* Red 
+  color: white;
+} */
+
+.first-mode {
+  background-color: #7aae7c; /* Red */
+  color: white;
+}
+
+/* Degree/Radian Button */
+.degree-mode {
+  background-color: #2196f3; /* Blue */
+  color: white;
+}
+
+.degree-mode:hover {
+  background-color: #ff9800;
+}
+
+.radian-mode {
+  background-color: #ff9800; /* Orange */
+  color: white;
+}
+
+.radian-mode:hover {
+  background-color: #2196f3;
+}
+
+.clear-button {
+  background-color: var(--button-clear);
+  color: white;
+}
+
+.clear-button:hover {
+  background-color: var(--button-clear-hover);
+}
+
+.operator-button {
+  background-color: var(--button-operator);
+  color: white;
+}
+
+.operator-button:hover {
+  background-color: var(--button-operator-hover);
+}
+
+.number-button {
+  background-color: var(--button-number);
+}
+
+.number-button:hover {
+  background-color: var(--button-number-hover);
+}
+
+.equals-button {
+  background-color: var(--button-equals);
+  color: white;
+}
+
+.equals-button:hover {
+  background-color: var(--button-equals-hover);
+}
+
+/* History Panel */
+.history-panel {
+  width: 350px;
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.history-header {
+  padding: 15px;
+  background-color: var(--bg-tertiary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.history-header h2 {
+  color: var(--text-primary);
+  font-size: 18px;
+  margin: 0;
+}
+
+.clear-history-button {
+  background-color: var(--button-clear);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  height: auto;
+}
+
+.clear-history-button:hover {
+  background-color: var(--button-clear-hover);
+}
+
+.history-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.history-item {
+  background-color: var(--bg-tertiary);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.history-item:hover {
+  background-color: var(--button-scientific-hover);
+}
+
+.history-expression {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.history-result {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.no-history {
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .calculator-container {
+    flex-direction: column;
+    max-width: 800px;
+  }
+
+  .calculator {
+    min-width: auto;
+  }
+
+  .history-panel {
+    width: 100%;
+    max-height: 300px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .calculator {
+    width: 100%;
+  }
+
+  .calculator-body {
+    flex-direction: column;
+  }
+
+  .scientific-panel {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  button {
+    padding: 10px 0;
+    font-size: 16px;
+    height: 45px;
+  }
+
+  .display {
+    padding: 20px;
+    min-height: 100px;
+    padding-right: 70px;
+  }
+
+  .display-value {
+    font-size: 28px;
+  }
+
+  .expression-value {
+    font-size: 14px;
+  }
+  
+  /* Adjust scientific grid to 4 columns */
+  .scientific-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Enhanced Mobile Optimization */
+@media (max-width: 480px) {
+  .app {
+    padding: 5px;
+  }
+  
+  .calculator-container {
+    padding: 0;
+    gap: 10px;
+  }
+
+  .calculator {
+    border-radius: 10px;
+    min-width: unset;
+    width: 100%;
+  }
+
+  .display {
+    padding: 10px;
+    min-height: 70px;
+    padding-right: 40px;
+  }
+
+  .display-value {
+    font-size: 22px;
+  }
+
+  .expression-value {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+
+  .memory-indicator {
+    top: 5px;
+    left: 5px;
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+
+  .display-controls {
+    top: 5px;
+    right: 5px;
+    gap: 4px;
+  }
+
+  .theme-toggle-button,
+  .history-toggle-button {
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
+  }
+
+  /* Optimize scientific panel for mobile */
+  .scientific-panel {
+    padding: 5px;
+  }
+
+  .memory-row {
+    gap: 3px;
+    margin-bottom: 5px;
+  }
+
+  .memory-button {
+    font-size: 10px;
+    height: 30px;
+    border-radius: 5px;
+  }
+
+  /* Make scientific grid 6 columns */
+  .scientific-grid {
+    gap: 3px;
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .scientific-button {
+    font-size: 11px;
+    height: 30px;
+    padding: 0;
+    border-radius: 5px;
+  }
+
+  /* Optimize standard panel for mobile */
+  .standard-panel {
+    padding: 5px;
+  }
+
+  .clear-row {
+    gap: 3px;
+    margin-bottom: 3px;
+  }
+
+  .numpad-grid {
+    gap: 3px;
+  }
+
+  .number-button,
+  .operator-button,
+  .clear-button {
+    font-size: 14px;
+    height: 35px;
+    border-radius: 5px;
+  }
+
+  .equals-button {
+    margin-top: 3px;
+    height: 35px;
+  }
+
+  /* History panel for mobile */
+  .history-panel {
+    border-radius: 10px;
+    max-height: 200px;
+  }
+
+  .history-header {
+    padding: 8px;
+  }
+
+  .history-header h2 {
+    font-size: 14px;
+  }
+
+  .clear-history-button {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+
+  .history-list {
+    padding: 5px;
+  }
+
+  .history-item {
+    padding: 6px;
+    margin-bottom: 5px;
+  }
+
+  .history-expression {
+    font-size: 10px;
+  }
+
+  .history-result {
+    font-size: 14px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+  /* Make scientific grid 4 columns on very small screens */
+  .scientific-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  button {
+    font-size: 12px;
+    height: 28px;
+    border-radius: 4px;
+  }
+
+  .memory-button {
+    font-size: 9px;
+    height: 26px;
+  }
+
+  .scientific-button {
+    font-size: 10px;
+    height: 26px;
+  }
+
+  .number-button,
+  .operator-button,
+  .clear-button {
+    font-size: 12px;
+    height: 30px;
+  }
+
+  .equals-button {
+    height: 30px;
+  }
+
+  .display-value {
+    font-size: 18px;
+  }
+
+  .expression-value {
+    font-size: 10px;
+  }
+}
