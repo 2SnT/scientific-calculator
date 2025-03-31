@@ -353,17 +353,37 @@ function Calculator() {
     updateCals("EE")
   }
 
+  const toggleSign = () => {
+    if (calc) {
+      // If the expression is a valid number, toggle its sign
+      try {
+        const currentValue = evaluateExpression(calc)
+        setCalc((-1 * Number.parseFloat(currentValue)).toString())
+        setResult("")
+      } catch (error) {
+        console.error("Error toggling sign:", error)
+        setCalc("Error")
+        setResult("")
+      }
+    }
+  }
+  
+
   return (
     <div className="calculator-container">
       <div className="calculator">
         <div className="display">
           {memory !== 0 && <div className="memory-indicator">M</div>}
           <div className="display-controls">
-            <button className="theme-toggle-button" onClick={toggleTheme}>
+            <button className="theme-toggle-button" onClick={toggleTheme}
+            title={theme === "dark-theme" ? "Switch to light mode" : "Switch to dark mode"}
+            >
               {theme === "dark-theme" ? "☀️" : "🌙"}
             </button>
-            <button className="history-toggle-button" onClick={toggleHistory}>
-              📜
+            <button className="history-toggle-button" onClick={toggleHistory} 
+            title={showHistory ? "Exit History" : "Show calculation history"}
+            >
+              {showHistory ? "×" : "📜"}
             </button>
           </div>
           <div className="expression-value">{calc || "0"}</div>
@@ -400,6 +420,34 @@ function Calculator() {
             </div>
 
             <div className="scientific-grid">
+              <button className="scientific-button" onClick={() => toggleSign("±")}>
+                ±
+              </button>
+              <button className="scientific-button" onClick={() => updateCals("π")}>
+                π
+              </button>
+              <button className="scientific-button" onClick={() => updateCals("(")}>
+                &#40;
+              </button>
+              <button className="scientific-button" onClick={() => updateCals(")")}>
+                &#41;
+              </button>
+              <button className="scientific-button" onClick={percentage}>
+                %
+              </button>
+              <button className="scientific-button" onClick={() => updateCals("e")}>
+                e
+              </button>
+              <button className="scientific-button" onClick={() => updateCals("!")}>
+                x!
+              </button>
+              <button className="scientific-button" onClick={() => addFunction("sqrt")}>
+                √
+              </button>
+              <button className="scientific-button" onClick={() => updateCals("e^")}>
+                eˣ
+              </button>
+
               {secondMode ? (
                 <>
                   <button className="scientific-button" onClick={() => addFunction("asin")}>
@@ -411,24 +459,23 @@ function Calculator() {
                   <button className="scientific-button" onClick={() => addFunction("atan")}>
                     tan⁻¹
                   </button>
-
                   <button className="scientific-button" onClick={() => addFunction("log2")}>
                     log₂
                   </button>
                   <button className="scientific-button" onClick={() => updateCals("2^")}>
                     2ˣ
                   </button>
+                  <button className="scientific-button" onClick={() => updateCals("10^")}>
+                    10ˣ
+                  </button>
+                  <button className="scientific-button" onClick={reciprocal}>
+                    1/x
+                  </button>
                   <button className="scientific-button" onClick={scientificNotation}>
                     EE
                   </button>
                   <button className="scientific-button" onClick={random}>
                     Rand
-                  </button>
-                  <button className="scientific-button" onClick={reciprocal}>
-                    1/x
-                  </button>
-                  <button className="scientific-button" onClick={percentage}>
-                    %
                   </button>
                 </>
               ) : (
@@ -442,6 +489,9 @@ function Calculator() {
                   <button className="scientific-button" onClick={() => addFunction("tan")}>
                     tan
                   </button>
+                  <button className="scientific-button" onClick={() => addFunction("log")}>
+                    log
+                  </button>
                   <button className="scientific-button" onClick={() => addFunction("sinh")}>
                     sinh
                   </button>
@@ -454,38 +504,11 @@ function Calculator() {
                   <button className="scientific-button" onClick={() => addFunction("ln")}>
                     ln
                   </button>
-                  <button className="scientific-button" onClick={() => updateCals("e^")}>
-                    eˣ
-                  </button>
-                  <button className="scientific-button" onClick={() => addFunction("log")}>
-                    log
-                  </button>
-                  <button className="scientific-button" onClick={() => updateCals("10^")}>
-                    10ˣ
-                  </button>
                   <button className="scientific-button" onClick={square}>
                     x²
                   </button>
-                  <button className="scientific-button" onClick={() => addFunction("sqrt")}>
-                    √
-                  </button>
                 </>
               )}
-              <button className="scientific-button" onClick={() => updateCals("π")}>
-                π
-              </button>
-              <button className="scientific-button" onClick={() => updateCals("e")}>
-                e
-              </button>
-              <button className="scientific-button" onClick={() => updateCals("(")}>
-                &#40;
-              </button>
-              <button className="scientific-button" onClick={() => updateCals(")")}>
-                &#41;
-              </button>
-              <button className="scientific-button" onClick={() => updateCals("!")}>
-                x!
-              </button>
             </div>
           </div>
 
@@ -564,7 +587,7 @@ function Calculator() {
           <div className="history-header">
             <h2>History</h2>
             <button className="clear-history-button" onClick={clearHistory}>
-              Clear
+              Clear History
             </button>
           </div>
           <div className="history-list">
